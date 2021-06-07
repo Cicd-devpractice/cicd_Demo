@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  build:
+  build-and-test:
 
     macos:
       xcode: 12.4.0 # Specify the Xcode version to use
@@ -18,3 +18,9 @@ jobs:
       - store_artifacts:
           path: test_output
           destination: scan-output
+
+workflows:
+  version: 2.1
+  build-and-test:
+    jobs:
+      - build-and-test
