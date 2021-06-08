@@ -4,6 +4,7 @@ jobs:
   build:
     macos:
       xcode: 12.4.0 # Specify the Xcode version to use
+    parallelism: 4
     steps:
       - checkout
       - run: pod install # Install CocoaPods dependencies
@@ -19,6 +20,7 @@ jobs:
   test:
     macos:
       xcode: 12.4.0
+    parallelism: 4
     steps:
       - checkout
       - run: 
