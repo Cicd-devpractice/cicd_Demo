@@ -1,11 +1,9 @@
 version: 2.1
 
 jobs:
-  build-and-test:
-
+  build:
     macos:
       xcode: 12.4.0 # Specify the Xcode version to use
-
     steps:
       - checkout
       - run: pod install # Install CocoaPods dependencies
@@ -18,9 +16,21 @@ jobs:
       - store_artifacts:
           path: test_output
           destination: scan-output
+  test:
+    macos:
+      xcode: 12.4.0
+    steps:
+      - checkout
+      - run: 
+          name: Run tests
+          command: fastlane scan
+          environment:
+            SCAN_DEVICE: iPhone 12
+            SCAN_SCHEME: cicd_Demo
 
 workflows:
   version: 2.1
-  build-and-test:
+  build_and_test:
     jobs:
-      - build-and-test
+      - build
+      - test
